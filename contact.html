@@ -1,0 +1,1988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="only light">
+<title>Contact | SAM</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="shortcut icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Archivo:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --yellow:#BEF264;
+    --ink:#0A0A0A;
+    --red:#BEF264;
+    --green:#BEF264;
+    --card:#FFFFFF;
+    --blue:#A78BFA;
+    --bg:#EDEDED;
+    --radius:20px;
+    --shadow: 8px 8px 0px 0px var(--ink);
+    --shadow-sm: 5px 5px 0px 0px var(--ink);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth; max-width:100vw; -webkit-text-size-adjust:100%; text-size-adjust:100%;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Archivo', sans-serif;
+    overflow-x:hidden;
+    max-width:100vw;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    -webkit-touch-callout:none;
+    -webkit-tap-highlight-color:transparent;
+  }
+  a, button, .btn, .submit-btn, .info-card, .socials-list a, input, textarea{
+  }
+  img, svg{
+    -webkit-user-drag:none;
+    user-drag:none;
+    max-width:100%;
+    height:auto;
+  }
+  h1,h2,h3,.display{font-family:'Space Grotesk', sans-serif;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+  a{color:inherit; text-decoration:none;}
+
+  nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:22px 40px;
+    border-top:4px solid var(--ink);
+    border-bottom:4px solid var(--ink);
+    background:var(--yellow);
+    position:sticky;
+    top:0;
+    z-index:100;
+  }
+  .logo{
+    font-weight:700;
+    font-size:1.6rem;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    letter-spacing:-0.01em;
+    cursor:pointer;
+  }
+  .logo-box{
+    background:var(--ink);
+    color:var(--yellow);
+    padding:2px 10px;
+    border:2px solid var(--ink);
+    border-radius:8px;
+  }
+
+  .breadcrumb-wrap{
+    max-width:1200px;
+    margin:0 auto;
+    padding:36px 40px 0;
+  }
+  .breadcrumb{
+    background:var(--card);
+    border:3px solid var(--ink);
+    border-radius:24px;
+    box-shadow:var(--shadow);
+    padding:22px 32px;
+    font-size:1.05rem;
+    font-weight:500;
+  }
+  .breadcrumb a{
+    text-decoration:underline;
+    text-underline-offset:3px;
+    font-weight:600;
+  }
+  .breadcrumb .sep{
+    margin:0 10px;
+    opacity:0.5;
+  }
+
+  .page-header{
+    max-width:1200px;
+    margin:0 auto;
+    padding:56px 40px 10px;
+  }
+  .page-header .mono{
+    font-size:0.85rem;
+    font-weight:600;
+    opacity:0.7;
+  }
+  .page-header h1{
+    font-size:clamp(2.2rem, 6vw, 3.6rem);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    margin-top:12px;
+    max-width:800px;
+  }
+  .page-header p{
+    margin-top:18px;
+    font-size:1.05rem;
+    font-weight:600;
+    max-width:560px;
+    line-height:1.5;
+  }
+
+  .contact-wrap{
+    max-width:1200px;
+    margin:0 auto;
+    padding:30px 40px 40px;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);
+    gap:28px;
+    align-items:start;
+  }
+
+  .info-stack{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+  }
+  /* Right column: LET'S TALK form, then FIND ME ELSEWHERE underneath */
+  .right-stack{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    min-width:0;
+  }
+  .info-card{
+    background:var(--card);
+    border:3px solid var(--ink);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:24px;
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .info-card:hover, .info-card:active{
+    transform:translate(4px,4px);
+    box-shadow:3px 3px 0px 0px var(--ink);
+  }
+  .info-icon{
+    width:44px; height:44px;
+    border:2px solid var(--ink);
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.2rem;
+    flex-shrink:0;
+  }
+  .info-card.email .info-icon{background:var(--blue);}
+  .info-card.location .info-icon{background:var(--blue);}
+  .info-card.availability .info-icon{background:var(--yellow);}
+
+  /* ---------- WHATSAPP CARD ---------- */
+  .wa-card{
+    width:100%;
+    min-height:220px;
+    background:var(--card);
+    border:3px solid var(--ink);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    position:relative;
+    display:flex;
+    align-items:center;
+    padding:20px 24px;
+    overflow:hidden;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .wa-card:hover,
+  .wa-card:active{
+    transform:translate(4px,4px);
+    box-shadow:3px 3px 0px 0px var(--ink);
+  }
+  .wa-animation-area{
+    width:clamp(90px,25vw,125px);
+    height:clamp(150px,40vw,190px);
+    flex-shrink:0;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-right:15px;
+  }
+  .wa-app-icon-wrapper{
+    width:clamp(54px,15vw,78px);
+    height:clamp(54px,15vw,78px);
+    border-radius:clamp(14px,3.5vw,20px);
+    background:var(--green);
+    border:clamp(3px,.8vw,4px) solid var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:absolute;
+    z-index:20;
+  }
+  .wa-inner-svg{ width:65%; height:65%; fill:var(--ink); }
+  .wa-notification-badge{
+    position:absolute;
+    top:-3px; right:-3px;
+    width:14px; height:14px;
+    background:var(--ink);
+    border:2px solid var(--ink);
+    border-radius:50%;
+    opacity:0;
+    transform:scale(0);
+    z-index:21;
+  }
+  #waMorphDot{
+    width:16px; height:16px;
+    background:var(--green);
+    border-radius:50%;
+    position:absolute;
+    opacity:0;
+    z-index:30;
+  }
+  .wa-phone{
+    width:100%; height:100%;
+    background:#f8fafc;
+    border:2px solid #cbd5e1;
+    border-radius:clamp(16px,4vw,24px);
+    position:absolute;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    opacity:0;
+    transform:scale(.15);
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+    z-index:15;
+  }
+  .wa-status-bar{
+    width:100%;
+    height:34px;
+    padding:3px 8px 0 8px;
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    position:relative;
+    flex-shrink:0;
+    z-index:10;
+  }
+  .wa-status-time{ font-size:clamp(6px,1.8vw,9px); font-weight:700; line-height:1; color:#0f172a; z-index:2; margin-top:2px; }
+  .wa-notch{
+    position:absolute;
+    left:50%; top:4px;
+    transform:translateX(-50%);
+    width:35%; height:7px;
+    background:#0f172a;
+    border-radius:12px;
+    z-index:1;
+  }
+  .wa-status-icons{ display:flex; align-items:center; gap:3px; z-index:2; margin-top:2px; }
+  .wa-status-icons svg{ width:clamp(6px,1.8vw,9px); height:clamp(6px,1.8vw,9px); fill:#0f172a; }
+  .wa-signal-box{ display:flex; align-items:center; justify-content:center; }
+  .wa-signal-box svg{ display:none; }
+  .wa-signal-box svg.active{ display:block; }
+  .wa-header-nav{
+    position:absolute;
+    top:14px; left:4px; right:4px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    z-index:20;
+  }
+  .wa-nav-icon-btn{
+    width:clamp(10px,2.4vw,14px);
+    height:clamp(10px,2.4vw,14px);
+    border-radius:50%;
+    background:#f1f5f9;
+    border:1px solid #cbd5e1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .wa-nav-icon-btn svg{ width:60%; height:60%; fill:#0f172a; }
+  .wa-sam-tag{
+    display:flex;
+    align-items:center;
+    gap:3px;
+    padding:1px 5px;
+    background:#f1f5f9;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:clamp(5.5px,1.3vw,7.5px);
+    color:#0f172a;
+    font-weight:800;
+    white-space:nowrap;
+  }
+  .wa-sam-tag-svg{
+    width:clamp(7px,1.5vw,9.5px);
+    height:clamp(7px,1.5vw,9.5px);
+    fill:#a855f7;
+    flex-shrink:0;
+  }
+  .wa-chat-area{
+    flex:1; width:100%;
+    padding:4px 6px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    gap:4px;
+    overflow:hidden;
+    background:transparent;
+  }
+  .wa-bubble{
+    max-width:88%;
+    padding:4px 7px;
+    border-radius:10px;
+    font-size:clamp(5.5px,1.3vw,7.5px);
+    line-height:1.2;
+    opacity:0;
+    box-shadow:0 1px 2px rgba(0,0,0,.05);
+    display:inline-block;
+    word-break:break-word;
+  }
+  .wa-bubble.left{
+    align-self:flex-start;
+    background:#fff;
+    color:#1e293b;
+    font-weight:500;
+    border:1px solid #e2e8f0;
+    border-bottom-left-radius:2px;
+  }
+  .wa-bubble.right{
+    align-self:flex-end;
+    background:#25D366;
+    color:#fff;
+    font-weight:600;
+    border:1px solid #20bd5a;
+    border-bottom-right-radius:2px;
+    box-shadow:0 2px 6px rgba(37,211,102,.2);
+  }
+  .wa-typing-left{
+    align-self:flex-start;
+    padding:4px 6px;
+    border-radius:8px;
+    border-bottom-left-radius:2px;
+    background:#fff;
+    border:1px solid #e2e8f0;
+    display:none;
+    align-items:center;
+    gap:2px;
+    opacity:0;
+    box-shadow:0 1px 2px rgba(0,0,0,.05);
+  }
+  .wa-typing-dot-left{ width:2.5px; height:2.5px; background:#64748b; border-radius:50%; }
+  .wa-typing-bubble{
+    align-self:flex-end;
+    padding:4px 6px;
+    border-radius:8px;
+    background:#25D366;
+    border:1px solid #20bd5a;
+    display:none;
+    align-items:center;
+    gap:2px;
+    opacity:0;
+  }
+  .wa-typing-dot{ width:2.5px; height:2.5px; background:#fff; border-radius:50%; }
+  .wa-input-bar{
+    width:100%;
+    height:20px;
+    padding:0 6px 3px 6px;
+    display:flex;
+    align-items:center;
+    background:transparent;
+    flex-shrink:0;
+    z-index:5;
+    transform:translateY(40px);
+  }
+  .wa-input-pill{
+    flex:1;
+    height:100%;
+    background:#fff;
+    border-radius:10px;
+    border:1px solid #cbd5e1;
+    display:flex;
+    align-items:center;
+    padding:0 6px;
+    color:#94a3b8;
+    font-size:clamp(4.5px,1.2vw,6px);
+  }
+  .wa-keyboard{
+    width:100%; height:26%;
+    flex-shrink:0;
+    background:#e2e8f0;
+    border-top:1px solid #cbd5e1;
+    padding:2px;
+    transform:translateY(100%);
+    z-index:4;
+  }
+  .wa-content{
+    flex:1;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+    z-index:5;
+  }
+  .wa-title{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:clamp(18px,4.5vw,30px);
+    font-weight:700;
+    margin-bottom:12px;
+    white-space:nowrap;
+  }
+  .wa-message-button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:190px;
+    max-width:100%;
+    flex:none;
+    height:clamp(45px,10vw,65px);
+    background:var(--green);
+    border:clamp(3px,.8vw,4px) solid var(--ink);
+    border-radius:16px;
+    box-shadow:6px 6px 0 var(--ink);
+    color:var(--ink);
+    font-family:'JetBrains Mono',monospace;
+    font-size:clamp(11px,2.8vw,18px);
+    font-weight:700;
+    text-decoration:none;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  /* no separate button effect: pressing SEND EMAIL / MESSAGE ME presses the whole card (same as the other cards) */
+  .wa-message-button.blue{ background:var(--blue); }
+  @media (min-width:601px) and (max-width:900px){ .wa-message-button{ width:260px; } }
+  @media (min-width:1100px){ .wa-message-button{ width:260px; } }
+  /* beat the generic ".info-body a" rules for the email button */
+  .info-body a.wa-message-button{
+    margin-top:12px;
+    display:inline-flex;
+    font-size:clamp(11px,2.8vw,18px);
+    line-height:normal;
+    text-decoration:none;
+  }
+
+  @media(max-width:400px){
+    .wa-card{ padding:15px 12px; }
+    .wa-animation-area{ margin-right:10px; }
+    .wa-message-button{ box-shadow:4px 4px 0 var(--ink); border-radius:12px; }
+  }
+
+  .info-body h3{
+    font-size:1rem;
+    font-weight:700;
+  }
+  .info-body p, .info-body a{
+    margin-top:6px;
+    font-size:0.92rem;
+    font-weight:500;
+    line-height:1.5;
+    display:block;
+    overflow-wrap:break-word;
+    word-break:break-word;
+  }
+  .info-body a{
+    text-decoration:underline;
+    text-underline-offset:3px;
+  }
+  .email-btn{
+    margin-top:10px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.82rem;
+    font-weight:600;
+    padding:12px 18px;
+    border:2.5px solid var(--ink);
+    border-radius:12px;
+    background:var(--green);
+    box-shadow:4px 4px 0px 0px var(--ink);
+    text-decoration:none !important;
+    transition:transform .12s ease, box-shadow .12s ease;
+    max-width:100%;
+    overflow-wrap:anywhere;
+  }
+  .email-btn:hover{
+    transform:translate(2px,2px);
+    box-shadow:2px 2px 0px 0px var(--ink);
+  }
+
+  .socials-card{
+    background:var(--ink);
+    color:var(--yellow);
+    border-radius:var(--radius);
+    padding:24px;
+    /* fills the height set by the script (= location + status cards), links stretch to fill it */
+    display:flex;
+    flex-direction:column;
+  }
+  .socials-card h3{
+    font-size:1rem;
+    font-weight:700;
+    color:var(--green);
+    font-family:'JetBrains Mono', monospace;
+  }
+  .socials-list{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-top:16px;
+    flex:1;
+  }
+  .socials-list a{
+    flex:1;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.9rem;
+    font-weight:600;
+    padding:12px 16px;
+    border:2px solid var(--yellow);
+    border-radius:12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    transition:transform .12s ease, background .12s ease;
+  }
+  .socials-list a:hover{
+    background:var(--yellow);
+    color:var(--ink);
+    transform:translate(2px,2px);
+  }
+
+  .form-card{
+    background:var(--card);
+    border:3px solid var(--ink);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:32px;
+  }
+  .form-card h2{
+    font-size:1.5rem;
+    font-weight:700;
+  }
+  .form-card .mono{
+    font-size:0.8rem;
+    font-weight:600;
+    opacity:0.6;
+    margin-top:6px;
+    display:block;
+  }
+  form{
+    margin-top:24px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+  .form-row{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:18px;
+  }
+  label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    font-weight:600;
+    margin-bottom:6px;
+    display:block;
+  }
+  input, textarea, select{
+    width:100%;
+    font-family:'Archivo', sans-serif;
+    font-size:16px;
+    font-weight:500;
+    padding:14px 16px;
+    border:2.5px solid var(--ink);
+    border-radius:12px;
+    background:var(--bg);
+    color:var(--ink);
+    outline:none;
+    -webkit-user-select:text;
+    user-select:text;
+    transition:box-shadow .12s ease, transform .12s ease;
+  }
+  input:focus, textarea:focus, select:focus{
+    box-shadow:4px 4px 0px 0px var(--ink);
+    transform:translate(-2px,-2px);
+  }
+  textarea{
+    resize:vertical;
+    min-height:130px;
+  }
+  .form-field{
+    display:flex;
+    flex-direction:column;
+  }
+  .submit-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:600;
+    padding:16px 28px;
+    border:3px solid var(--ink);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    background:var(--red);
+    color:var(--ink);
+    font-size:0.95rem;
+    cursor:pointer;
+    transition:transform .12s ease, box-shadow .12s ease;
+    align-self:flex-start;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .submit-btn-icon{
+    width:20px; height:20px;
+    flex-shrink:0;
+  }
+  .submit-btn:hover{
+    transform:translate(3px,3px);
+    box-shadow:3px 3px 0px 0px var(--ink);
+  }
+  /* Form switched OFF in the code (FORM_SWITCH): cement-coloured button */
+  .submit-btn.is-off{
+    background:#A3A39E;
+    color:#3a3a38;
+  }
+  input:disabled{ opacity:.55; }
+  .form-title-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .info-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:30px; height:30px;
+    padding:0;
+    border:none;
+    background:transparent;
+    color:var(--ink);
+    border-radius:50%;
+    cursor:pointer;
+    flex-shrink:0;
+  }
+  .info-btn svg{ width:18px; height:18px; }
+  .info-btn .info-icon-fill{ display:none; }
+  .info-btn[aria-expanded="true"] .info-icon-fill{ display:block; }
+  .info-btn[aria-expanded="true"] .info-icon-outline{ display:none; }
+  .form-info{
+    margin-top:14px;
+    font-size:0.85rem;
+    font-weight:500;
+    line-height:1.5;
+    padding:10px 14px;
+    border:2px solid var(--ink);
+    border-radius:12px;
+    background:var(--yellow);
+  }
+  .form-info{max-height:0;opacity:0;margin-top:0;padding-top:0;padding-bottom:0;border-width:0;overflow:hidden;transform:translateY(-6px);transition:max-height .4s ease,opacity .3s ease,margin-top .4s ease,padding .4s ease,border-width .4s ease,transform .4s ease;}
+  .form-info.open{max-height:260px;opacity:1;margin-top:14px;padding-top:10px;padding-bottom:10px;border-width:2px;transform:none;}
+  .form-note:empty{ display:none; }
+  .form-note{
+    font-size:0.8rem;
+    opacity:0.6;
+    margin-top:4px;
+  }
+
+  footer{
+    padding:60px 40px;
+    text-align:center;
+    border-top:3px solid var(--ink);
+  }
+  .footer-links{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.85rem;
+    font-weight:600;
+  }
+  .footer-links a{
+    border-bottom:2px solid var(--ink);
+  }
+
+  /* ---------- SPONSOR / PARTNER GRID ---------- */
+  .sponsors{
+    background:#F5A6C9;
+    border:3px solid var(--ink);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    max-width:1200px;
+    margin:60px auto 0;
+    padding:60px 40px;
+  }
+  .brand-mark{
+    display:flex;
+    justify-content:center;
+    margin-bottom:20px;
+  }
+  .brand-mark img{
+    height:56px;
+    width:auto;
+    object-fit:contain;
+  }
+  .sponsors-label{
+    text-align:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.8rem;
+    font-weight:600;
+    opacity:0.6;
+    margin-bottom:24px;
+  }
+  .sponsor-grid{
+    max-width:1200px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(4, minmax(0,1fr));
+    gap:18px;
+  }
+  .sponsor-slot{
+    height:90px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    pointer-events:none;
+    cursor:default;
+  }
+  .sponsor-slot img{
+    max-width:80%;
+    max-height:50px;
+    object-fit:contain;
+  }
+  .sponsor-slot .placeholder-text{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    font-weight:600;
+    text-align:center;
+    padding:0 10px;
+    opacity:0.5;
+  }
+
+  /* ---------- SOCIAL ICONS ---------- */
+  .social-row{
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    margin-top:50px;
+  }
+  .social-icon{
+    width:52px; height:52px;
+    border:2.5px solid var(--ink);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--card);
+    transition:transform .12s ease, background .12s ease;
+  }
+  .social-icon:hover{
+    background:var(--yellow);
+    transform:translate(2px,2px);
+  }
+  .social-icon svg{
+    width:22px; height:22px;
+  }
+
+  /* ---------- LEGAL / COPYRIGHT ---------- */
+  .legal-footer{
+    background:var(--ink);
+    color:#aaa;
+    margin-top:60px;
+    padding:36px 40px 1mm;
+    text-align:center;
+  }
+  .legal-footer p{
+    font-size:0.8rem;
+    line-height:1.7;
+    max-width:700px;
+    margin:0 auto;
+  }
+  .legal-footer a{
+    color:var(--yellow);
+    text-decoration:underline;
+    text-underline-offset:2px;
+  }
+  .legal-footer .copyright-line{
+    color:#fff;
+    font-weight:600;
+    margin-bottom:8px;
+  }
+
+  @media (max-width:900px){
+    .contact-wrap{grid-template-columns:minmax(0,1fr); gap:20px;}
+    /* Phone / tablet keep the ORIGINAL order: Email, WhatsApp, Location, Status, Find me elsewhere, then the form */
+    .info-stack, .right-stack{display:contents;}
+    .info-card.email{order:1;}
+    .wa-card{order:2;}
+    .info-card.location{order:3;}
+    .info-card.availability{order:4;}
+    .socials-card{order:5;}
+    .form-card{order:6; margin-top:8px;}
+  }
+  @media (max-width:600px){
+    nav{padding:16px 20px;}
+    .breadcrumb-wrap{padding:24px 20px 0;}
+    .breadcrumb{padding:16px 20px; font-size:0.9rem; border-radius:18px;}
+    .page-header{padding:40px 20px 10px;}
+    .contact-wrap{padding:20px 20px 30px; gap:20px;}
+    .form-card{margin-top:0;}
+    .form-card{padding:22px;}
+    .form-row{grid-template-columns:minmax(0,1fr);}
+    .sponsors{padding:40px 20px; margin-top:40px;}
+    .sponsor-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px;}
+    .sponsor-slot{height:70px;}
+    .social-row{gap:12px; margin-top:36px;}
+    .social-icon{width:46px; height:46px;}
+    .legal-footer{padding:28px 20px 1mm; margin-top:40px;}
+  }
+
+  @media (max-width:380px){
+    .logo{font-size:1.3rem;}
+    .breadcrumb{font-size:0.8rem; padding:14px 16px;}
+    .info-card{padding:18px; gap:12px;}
+    .socials-list a{font-size:0.8rem; padding:10px 12px;}
+    .submit-btn{width:100%; text-align:center;}
+  }
+
+  @media (min-width:1440px){
+    .page-header, .contact-wrap, .breadcrumb-wrap{max-width:1320px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+    html{scroll-behavior:auto;}
+  }
+  :focus-visible{
+    outline:3px solid var(--red);
+    outline-offset:2px;
+  }
+
+  /* ---------- LOADING SCREEN ---------- */
+  #loading-screen{
+    position:fixed !important;
+    top:0 !important;
+    left:0 !important;
+    right:0 !important;
+    bottom:0 !important;
+    width:100vw !important;
+    height:100vh !important;
+    min-width:100% !important;
+    min-height:100% !important;
+    max-width:none !important;
+    background-color:#fbfbfe;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:2147483647;
+    transition:opacity 0.6s cubic-bezier(0.16,1,0.3,1), visibility 0.6s cubic-bezier(0.16,1,0.3,1);
+    -webkit-touch-callout:none !important;
+    -webkit-user-select:none !important;
+    -moz-user-select:none !important;
+    -ms-user-select:none !important;
+    user-select:none !important;
+    -webkit-tap-highlight-color:transparent !important;
+  }
+  @supports (height: 100dvh) {
+    #loading-screen{ height:100dvh !important; }
+  }
+  .loading-video-wrapper{
+    position:relative;
+    width:100%;
+    max-width:460px;
+    padding:1.5rem;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+  #loading-video{
+    width:100%;
+    height:auto;
+    max-height:80vh;
+    object-fit:contain;
+    display:block;
+    pointer-events:none !important;
+    -webkit-touch-callout:none !important;
+    -webkit-user-select:none !important;
+    user-select:none !important;
+    mix-blend-mode:multiply;
+  }
+  .touch-protection-shield{
+    position:absolute;
+    top:0;left:0;right:0;bottom:0;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:10;
+    background:rgba(0,0,0,0);
+    pointer-events:auto;
+    -webkit-touch-callout:none !important;
+    -webkit-user-select:none !important;
+    user-select:none !important;
+    -webkit-tap-highlight-color:transparent !important;
+  }
+  .loading-hidden{
+    opacity:0 !important;
+    visibility:hidden !important;
+    pointer-events:none !important;
+  }
+
+  /* ---------- CUSTOM INTERACTIVE CURSOR ---------- */
+  html.has-custom-cursor,
+  html.has-custom-cursor *,
+  html.has-custom-cursor *::before,
+  html.has-custom-cursor *::after{
+    cursor:none !important;
+  }
+  .custom-cursor-container{
+    position:fixed;
+    top:0;
+    left:0;
+    pointer-events:none !important;
+    z-index:2147483647;
+    transform-origin:0 0;
+    display:flex;
+    align-items:flex-start;
+    transform:translate3d(-100px,-100px,0);
+    will-change:transform;
+  }
+  .cursor-arrow-icon{
+    width:22px;
+    height:26px;
+    filter:drop-shadow(0px 2px 4px rgba(0,0,0,0.3));
+    display:block;
+    transform:translate(2px,-3px) scale(1.18);
+    transform-origin:top left;
+  }
+  .cursor-pointer-icon{
+    width:22px;
+    height:22px;
+    fill:#ff6b00;
+    filter:drop-shadow(0px 2px 4px rgba(0,0,0,0.3));
+    display:none;
+    transform:rotate(-25deg);
+    transform-origin:top left;
+  }
+  .cursor-text-icon{
+    width:14px;
+    height:22px;
+    filter:drop-shadow(0px 2px 4px rgba(0,0,0,0.3));
+    display:none;
+    margin-top:2px;
+  }
+  .cursor-spinner-icon{
+    width:22px;
+    height:22px;
+    border:3px solid rgba(255,170,0,0.3);
+    border-top:3px solid #ffaa00;
+    border-radius:50%;
+    display:none;
+    animation:cursorspin 0.8s linear infinite;
+    margin-top:2px;
+    filter:drop-shadow(0px 2px 4px rgba(0,0,0,0.3));
+  }
+  .cursor-unavailable-icon{
+    width:20px;
+    height:20px;
+    filter:drop-shadow(0px 2px 4px rgba(0,0,0,0.3));
+    display:none;
+    margin-top:2px;
+  }
+  @keyframes cursorspin{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+  }
+  .custom-cursor-badge{
+    background-color:#2b7fff;
+    color:#ffffff;
+    font-size:11px;
+    font-weight:600;
+    padding:3px 10px;
+    border-radius:12px;
+    border:1.5px solid #ffffff;
+    margin-left:0px;
+    margin-top:10px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.25);
+    white-space:nowrap;
+    transition:background-color 0.2s ease;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .custom-cursor-badge svg{
+    width:14px;
+    height:14px;
+    fill:#ffffff;
+    display:inline-block;
+    vertical-align:middle;
+  }
+  .animated-dots::after{
+    content:'.';
+    display:inline-block;
+    text-align:left;
+    animation:dotAnimation 1.5s infinite steps(1);
+  }
+  @keyframes dotAnimation{
+    0%{content:'.';}
+    33%{content:'..';}
+    66%{content:'...';}
+  }
+  .custom-cursor-container.is-pointer .cursor-arrow-icon{display:none;}
+  .custom-cursor-container.is-pointer .cursor-pointer-icon{display:block;}
+  .custom-cursor-container.is-pointer .custom-cursor-badge{
+    background-color:#ff6b00;
+    margin-left:-2px;
+    margin-top:14px;
+  }
+  .custom-cursor-container.is-writing .cursor-arrow-icon{display:none;}
+  .custom-cursor-container.is-writing .cursor-text-icon{display:block;}
+  .custom-cursor-container.is-writing .custom-cursor-badge{
+    background-color:#00a86b;
+    margin-left:4px;
+    margin-top:6px;
+    padding:3px 10px;
+  }
+  .custom-cursor-container.is-busy .cursor-arrow-icon{display:none;}
+  .custom-cursor-container.is-busy .cursor-pointer-icon{display:none;}
+  .custom-cursor-container.is-busy .cursor-text-icon{display:none;}
+  .custom-cursor-container.is-busy .cursor-unavailable-icon{display:none;}
+  .custom-cursor-container.is-busy .cursor-spinner-icon{display:block;}
+  .custom-cursor-container.is-busy .custom-cursor-badge{
+    background-color:#ffaa00;
+    margin-left:4px;
+    margin-top:6px;
+  }
+  .custom-cursor-container.is-unavailable .cursor-arrow-icon{display:none;}
+  .custom-cursor-container.is-unavailable .cursor-pointer-icon{display:none;}
+  .custom-cursor-container.is-unavailable .cursor-text-icon{display:none;}
+  .custom-cursor-container.is-unavailable .cursor-spinner-icon{display:none;}
+  .custom-cursor-container.is-unavailable .cursor-unavailable-icon{display:block;}
+  .custom-cursor-container.is-unavailable .custom-cursor-badge{
+    background-color:#e63946;
+    margin-left:4px;
+    margin-top:8px;
+  }
+  [disabled], .disabled, [aria-disabled="true"]{ pointer-events:none !important; }
+  @media (hover:none) and (pointer:coarse){
+    *, *::before, *::after{ cursor:auto !important; }
+    .custom-cursor-container{ display:none !important; }
+  }
+
+  /* ---------- TOUCH SCREENS: no "stuck" hover after a tap, a quick press effect instead ---------- */
+  @media (hover:none){
+    .info-card:hover, .wa-card:hover{transform:none; box-shadow:var(--shadow);}
+    .info-card:active, .wa-card:active{transform:translate(4px,4px); box-shadow:3px 3px 0px 0px var(--ink);}
+    .submit-btn:hover{transform:none; box-shadow:var(--shadow);}
+    .submit-btn:active{transform:translate(3px,3px); box-shadow:3px 3px 0px 0px var(--ink);}
+  }
+
+  /* pressed card (set by the script below): same effect as hovering a card; used by SEND EMAIL / MESSAGE ME and every card */
+  .info-card.is-pressed, .wa-card.is-pressed{
+    transform:translate(4px,4px);
+    box-shadow:3px 3px 0px 0px var(--ink);
+  }
+
+/* ====== C2E-style floating nav (same look as the C2E page) ====== */
+.c2n-header{position:sticky;top:12px;z-index:1000;width:min(1200px,calc(100% - 24px));margin:12px auto 0;padding-top:2px;font:15px/1.65 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-user-select:none;user-select:none}
+.c2n-header a{color:inherit;text-decoration:none}
+.c2n-nav{min-height:64px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;background:#fff;border:2px solid #000;border-radius:999px;padding:8px 14px;box-shadow:4px 4px 0 #000}
+.c2n-brand{font-weight:900;letter-spacing:-.06em;font-size:22px;display:flex;align-items:center;gap:9px;white-space:nowrap;color:#191a22}
+.c2n-mark{background:#A78BFA;color:#000;border:2px solid #000;border-radius:50%;width:38px;height:38px;display:grid;place-items:center;padding:0;font-size:13px;letter-spacing:-.04em;box-shadow:2px 2px 0 #000}
+.c2n-dot{width:10px;height:10px;border-radius:50%;background:#BEF264;border:1px solid #000;display:inline-block;margin:5px 0 0 1px}
+.c2n-links{display:flex;align-items:center;gap:3px;font-size:12px;color:#111}
+.c2n-links a{padding:8px 11px;border:1px solid transparent;border-radius:999px;font-weight:800;transition:all .15s ease}
+@media(hover:hover){.c2n-links a:hover{background:#BEF264;color:#000;box-shadow:2px 2px 0 #000;border-color:#000;transform:translate(-1px,-1px)}}
+.c2n-links a:focus-visible{outline:2px solid #A78BFA;outline-offset:2px}
+.c2n-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 15px;border-radius:999px;background:#BEF264;color:#000;border:2px solid #000;box-shadow:3px 3px 0 #000;font-size:12px;font-weight:850;transition:all .15s ease;font-family:inherit}
+.c2n-btn:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 #000}
+.c2n-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #000}
+.c2n-toggle{appearance:none;-webkit-appearance:none;display:none;position:relative;background:#fff;border:2px solid #000;border-radius:50%;width:42px;height:42px;box-shadow:2px 2px 0 #000;align-items:center;justify-content:center;align-self:center;flex:0 0 42px;padding:0;line-height:0;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+.c2n-toggle:hover{background:#BEF264;transform:translate(-1px,-1px);box-shadow:4px 4px 0 #000}
+.c2n-toggle:active{transform:translate(1px,1px);box-shadow:1px 1px 0 #000}
+.c2n-burger{position:absolute;left:50%;top:50%;width:22px;height:18px;transform:translate(-50%,-50%);pointer-events:none;display:block}
+.c2n-line{position:absolute;left:1px;width:20px;height:2.6px;background:#000;border-radius:999px;transition:top .24s ease,transform .24s ease,opacity .16s ease;transform-origin:center}
+.c2n-l1{top:2px}.c2n-l2{top:7.7px}.c2n-l3{top:13.4px}
+.c2n-toggle.menu-active .c2n-l1{top:7.7px;transform:rotate(45deg)}
+.c2n-toggle.menu-active .c2n-l2{opacity:0;transform:scaleX(0)}
+.c2n-toggle.menu-active .c2n-l3{top:7.7px;transform:rotate(-45deg)}
+.c2n-mobile{display:none;background:#fff;border:2px solid #000;border-radius:24px;padding:12px;margin-top:12px;box-shadow:6px 6px 0 #000}
+.c2n-mobile.open{display:block;animation:c2nIn .22s ease-out}
+.c2n-mobile a{display:block;padding:10px 13px;border-radius:14px;font-size:13px;font-weight:850;color:#191a22}
+@media(hover:hover){.c2n-mobile a:hover{background:#BEF264;outline:1px solid #000}}
+@media(min-width:901px){.c2n-mobile{display:none !important}}
+.c2n-mobile .c2n-cta{background:#BEF264;border:2px solid #000;text-align:center;margin-top:8px;box-shadow:2px 2px 0 #000}
+.c2n-mobile a{transition:all .15s ease;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.c2n-mobile a:not(.c2n-cta):active{background:#BEF264;color:#000;outline:1px solid #000;box-shadow:2px 2px 0 #000;transform:translate(-1px,-1px)}
+.c2n-mobile .c2n-cta{transition:all .15s ease}
+@media(hover:hover){.c2n-mobile .c2n-cta:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 #000}}
+.c2n-mobile .c2n-cta:active{background:#BEF264;transform:translate(2px,2px);box-shadow:1px 1px 0 #000}
+.c2n-mobile a:focus-visible{outline:2px solid #A78BFA;outline-offset:2px}
+.c2n-links a:active{background:#BEF264;color:#000;box-shadow:2px 2px 0 #000;border-color:#000;transform:translate(-1px,-1px)}
+.c2n-links a[aria-current="page"]{background:#BEF264;color:#000;box-shadow:2px 2px 0 #000;border-color:#000;transform:translate(-1px,-1px)}
+.c2n-mobile a[aria-current="page"]:not(.c2n-cta){background:#BEF264;color:#000;outline:1px solid #000;box-shadow:2px 2px 0 #000;transform:translate(-1px,-1px)}
+@keyframes c2nIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.c2n-nav>.c2n-btn{grid-column:1;grid-row:1;justify-self:start}
+.c2n-links{grid-column:2;grid-row:1;justify-self:center}
+.c2n-brand{grid-column:3;grid-row:1;justify-self:end}
+.c2n-toggle{grid-column:3;grid-row:1;justify-self:end}
+@media(max-width:900px){.c2n-nav>.c2n-btn{display:none}.c2n-links{display:none}.c2n-brand{grid-column:2;justify-self:center}.c2n-toggle{display:flex}.c2n-nav{min-height:62px}}
+@media(max-width:480px){.c2n-nav{min-height:60px;padding:7px 10px;gap:6px}.c2n-nav>.c2n-btn{padding:8px 11px;font-size:11px;box-shadow:2px 2px 0 #000}.c2n-logo{height:30px}}
+
+/* ====== C2E colour theme overrides ====== */
+.c2n-logo{height:38px;width:auto;max-width:60vw;display:block;pointer-events:none}
+.brand-mark img{height:48px !important;width:auto !important}
+body{overflow-x:hidden !important;overflow-x:clip !important}
+.avatar{background-size:cover !important;background-position:center 20% !important;background-repeat:no-repeat !important}
+.tag.blue,.badge.blue,.card.web .card-icon,.shape2,.info-card.email .info-icon,.info-card.location .info-icon,.c2e-stats > div:nth-child(2),.c2e-stats > div:nth-child(2) *,.wa-message-button.blue{color:#000 !important}
+.term-dot{background:#FF5C5C}.term-dot:nth-child(2){background:#FFDE4D}.term-dot:nth-child(3){background:#7CFF6B}
+.t-blue{color:#A99BFF}
+:focus-visible{outline-color:#A78BFA !important}
+</style>
+</head>
+<body>
+
+
+<div id="loading-screen" aria-label="Loading animation" role="dialog" aria-modal="true" style="position:fixed !important; top:0 !important; left:0 !important; right:0 !important; bottom:0 !important; width:100vw !important; height:100vh !important; z-index:2147483647 !important; background-color:#fbfbfe !important; display:flex !important; justify-content:center !important; align-items:center !important; margin:0 !important; padding:0 !important;">
+  <div class="loading-video-wrapper">
+    <div class="touch-protection-shield" id="protection-shield"></div>
+    <video id="loading-video" autoplay loop muted playsinline preload="auto"
+      controlslist="nodownload nofullscreen noremoteplayback" disablePictureInPicture oncontextmenu="return false;">
+      <source src="loading.mp4" type="video/mp4">
+      <source src="loading.webm" type="video/webm">
+    </video>
+  </div>
+</div>
+
+<script>
+/* fail-safe: if anything below ever fails, the loading screen still goes away */
+setTimeout(function(){
+  var l = document.getElementById('loading-screen');
+  if (l) { l.classList.add('loading-hidden'); l.setAttribute('aria-hidden','true');  }
+}, 9000);
+</script>
+
+<!-- C2E-style sticky header -->
+<header class="c2n-header">
+  <div class="c2n-nav" role="navigation" aria-label="Main navigation">
+    <a class="c2n-brand" href="index.html" aria-label="Muhib home"><img class="c2n-logo" src="muhib.png?v=2" alt="Muhib"></a>
+    <div class="c2n-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="contact.html" aria-current="page">Contact</a></div>
+    <a class="c2n-btn" href="https://wa.me/8801772729697" target="_blank" rel="noopener noreferrer">Let's Chat ↗</a>
+    <button class="c2n-toggle" id="c2nToggle" aria-label="Open navigation menu" aria-expanded="false"><span class="c2n-burger" aria-hidden="true"><span class="c2n-line c2n-l1"></span><span class="c2n-line c2n-l2"></span><span class="c2n-line c2n-l3"></span></span></button>
+  </div>
+  <div class="c2n-mobile" id="c2nMobile">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="contact.html" aria-current="page">Contact</a>
+    <a class="c2n-cta" href="https://wa.me/8801772729697" target="_blank" rel="noopener noreferrer">Let's Chat ↗</a>
+  </div>
+</header>
+
+
+
+
+
+
+
+
+<section class="page-header">
+  <span class="mono" id="page-eyebrow">// GET IN TOUCH</span>
+  <h1 id="page-title">Let's talk.</h1>
+  <p id="page-sub">Have a question, an idea, or just want to say hi? Send a message below or reach out directly. I usually reply within a day.</p>
+</section>
+
+<div class="contact-wrap">
+  <div class="info-stack">
+    <div class="info-card email">
+      <div class="info-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
+  <path d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2zm-2 9.8V4.698l5.803 3.546zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.5 4.5 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586zM16 9.671V4.697l-5.803 3.546.338.208A4.5 4.5 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671"/>
+  <path d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791"/>
+</svg></div>
+      <div class="info-body">
+        <h3>Email</h3>
+        <a href="mailto:muhibulla.mahbub@gmail.com" id="info-email" class="wa-message-button blue">SEND EMAIL&nbsp; &rarr;</a>
+      </div>
+    </div>
+
+    <!-- WHATSAPP CARD (animation plays only on click) -->
+    <div class="wa-card" id="whatsappCard">
+      <div class="wa-animation-area" id="waAnimationArea">
+        <div class="wa-app-icon-wrapper" id="waAppIconWrapper">
+          <div class="wa-notification-badge" id="waNotificationBadge"></div>
+          <svg class="wa-inner-svg" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+          </svg>
+        </div>
+        <div id="waMorphDot"></div>
+        <div class="wa-phone" id="waPhone">
+          <div class="wa-status-bar">
+            <span class="wa-status-time" id="waStatusTime">9:41</span>
+            <div class="wa-notch"></div>
+            <div class="wa-header-nav">
+              <div class="wa-nav-icon-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/></svg>
+              </div>
+              <div class="wa-sam-tag">
+                <svg class="wa-sam-tag-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16M2.31 5.243A1 1 0 0 1 3.28 4H6a1 1 0 0 1 1 1v.116A4.2 4.2 0 0 1 8 5c.35 0 .69.04 1 .116V5a1 1 0 0 1 1-1h2.72a1 1 0 0 1 .97 1.243l-.311 1.242A2 2 0 0 1 11.439 8H11a2 2 0 0 1-1.994-1.839A3 3 0 0 0 8 6c-.393 0-.74.064-1.006.161A2 2 0 0 1 5 8h-.438a2 2 0 0 1-1.94-1.515zM4.969 9.75A3.5 3.5 0 0 0 8 11.5a3.5 3.5 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1-3.898-2.25.5.5 0 0 1 .866-.5z"/></svg>
+                <span>SAM</span>
+              </div>
+              <div class="wa-nav-icon-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1z"/><path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708z"/></svg>
+              </div>
+            </div>
+            <div class="wa-status-icons">
+              <div class="wa-signal-box">
+                <svg id="waSig2" class="active" viewBox="0 0 16 16"><path d="M0 11.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5zm4 5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m4 0a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"/></svg>
+                <svg id="waSig3" viewBox="0 0 16 16"><path d="M0 11.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5zm4 8a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"/></svg>
+                <svg id="waSig4" viewBox="0 0 16 16"><path d="M0 11.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5z"/></svg>
+              </div>
+              <svg viewBox="0 0 16 16"><path d="M2 6h5v4H2z"/><path d="M2 4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm10 1a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm4 3a1.5 1.5 0 0 1-1.5 1.5v-3A1.5 1.5 0 0 1 16 8"/></svg>
+            </div>
+          </div>
+          <div class="wa-chat-area">
+            <div class="wa-typing-left" id="waTypingLeft">
+              <span class="wa-typing-dot-left"></span><span class="wa-typing-dot-left"></span><span class="wa-typing-dot-left"></span>
+            </div>
+            <div class="wa-bubble left" id="waMsg1">My sales are stuck.</div>
+            <div class="wa-typing-bubble" id="waTyping">
+              <span class="wa-typing-dot"></span><span class="wa-typing-dot"></span><span class="wa-typing-dot"></span>
+            </div>
+            <div class="wa-bubble right" id="waMsg2">Let’s fix that.</div>
+          </div>
+          <div class="wa-input-bar" id="waInputBar"><div class="wa-input-pill">Message SAM...</div></div>
+          <div class="wa-keyboard" id="waKeyboard">
+            <svg viewBox="0 0 240 100" width="100%" height="100%" preserveAspectRatio="none">
+              <rect width="240" height="100" fill="transparent"/>
+              <g fill="#ffffff" stroke="#cbd5e1" stroke-width=".5">
+                <rect x="4" y="8" width="20" height="22" rx="4"/><rect x="27" y="8" width="20" height="22" rx="4"/><rect x="50" y="8" width="20" height="22" rx="4"/><rect x="73" y="8" width="20" height="22" rx="4"/><rect x="96" y="8" width="20" height="22" rx="4"/><rect x="119" y="8" width="20" height="22" rx="4"/><rect x="142" y="8" width="20" height="22" rx="4"/><rect x="165" y="8" width="20" height="22" rx="4"/><rect x="188" y="8" width="20" height="22" rx="4"/><rect x="211" y="8" width="20" height="22" rx="4"/>
+                <rect x="15" y="36" width="20" height="22" rx="4"/><rect x="38" y="36" width="20" height="22" rx="4"/><rect x="61" y="36" width="20" height="22" rx="4"/><rect x="84" y="36" width="20" height="22" rx="4"/><rect x="107" y="36" width="20" height="22" rx="4"/><rect x="130" y="36" width="20" height="22" rx="4"/><rect x="153" y="36" width="20" height="22" rx="4"/><rect x="176" y="36" width="20" height="22" rx="4"/><rect x="199" y="36" width="20" height="22" rx="4"/>
+                <rect x="4" y="64" width="28" height="22" rx="4" fill="#cbd5e1"/><rect x="36" y="64" width="20" height="22" rx="4"/><rect x="59" y="64" width="20" height="22" rx="4"/><rect x="82" y="64" width="20" height="22" rx="4"/><rect x="105" y="64" width="20" height="22" rx="4"/><rect x="128" y="64" width="20" height="22" rx="4"/><rect x="151" y="64" width="20" height="22" rx="4"/><rect x="174" y="64" width="20" height="22" rx="4"/><rect x="198" y="64" width="38" height="22" rx="4" fill="#cbd5e1"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="wa-content">
+        <div class="wa-title">WhatsApp</div>
+        <a class="wa-message-button" id="info-phone" href="https://wa.me/8801772729697" target="_blank" rel="noopener noreferrer">MESSAGE ME&nbsp; &rarr;</a>
+      </div>
+    </div>
+
+    <div class="info-card location" id="locationCard">
+      <div class="info-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+  <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+</svg></div>
+      <div class="info-body">
+        <h3>Location</h3>
+        <p id="info-location">Dhaka, Bangladesh</p>
+      </div>
+    </div>
+    <div class="info-card availability" id="statusCard">
+      <div class="info-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-award-check" viewBox="0 0 16 16">
+  <!-- Award Ribbon Frame -->
+  <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68zm1.196 1.193.684 1.365 1.086 1.072L12.387 6l.248 1.506-1.086 1.072-.684 1.365-1.51.229L8 10.874l-1.355-.702-1.51-.229-.684-1.365-1.086-1.072L3.614 6l-.25-1.506 1.087-1.072.684-1.365 1.51-.229L8 1.126l1.356.702z"/>
+  <!-- Lower Ribbon Tails -->
+  <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+  <!-- Perfectly Centered & Scaled Down Checkmark -->
+  <g transform="translate(2.8, 1.1) scale(0.65)">
+    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+  </g>
+</svg></div>
+      <div class="info-body">
+        <h3>Status</h3>
+        <p id="info-availability">Always up for a good conversation</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-stack">
+    <div class="form-card">
+      <div class="form-title-row">
+        <h2 id="form-title">LET’S TALK</h2>
+        <button type="button" class="info-btn" id="info-btn" aria-label="Info" aria-expanded="false" aria-controls="form-info">
+          <svg class="info-icon-outline bi bi-info-circle" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+          </svg>
+          <svg class="info-icon-fill bi bi-info-circle-fill" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
+          </svg>
+        </button>
+      </div>
+      <span class="mono" id="form-sub">// Tell us what's on your mind.</span>
+      <p class="form-info" id="form-info" aria-hidden="true"></p>
+      <form id="contact-form">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="name">NAME</label>
+            <input type="text" id="name" name="name" placeholder="Your name" autocomplete="name" required>
+          </div>
+          <div class="form-field">
+            <label for="email">EMAIL</label>
+            <input type="email" id="email" name="email" placeholder="you@email.com" autocomplete="email" autocapitalize="off" spellcheck="false" required>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="website">WEBSITE</label>
+          <input type="text" id="website" name="website" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="yourwebsite.com" maxlength="200" required>
+        </div>
+        <button type="submit" class="submit-btn" id="submit-btn">
+          <svg class="submit-btn-icon bi bi-wechat" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M11.176 14.429c-2.665 0-4.826-1.8-4.826-4.018 0-2.22 2.159-4.02 4.824-4.02S16 8.191 16 10.411c0 1.21-.65 2.301-1.666 3.036a.32.32 0 0 0-.12.366l.218.81a.6.6 0 0 1 .029.117.166.166 0 0 1-.162.162.2.2 0 0 1-.092-.03l-1.057-.61a.5.5 0 0 0-.256-.074.5.5 0 0 0-.142.021 5.7 5.7 0 0 1-1.576.22M9.064 9.542a.647.647 0 1 0 .557-1 .645.645 0 0 0-.646.647.6.6 0 0 0 .09.353Zm3.232.001a.646.646 0 1 0 .546-1 .645.645 0 0 0-.644.644.63.63 0 0 0 .098.356"/>
+            <path d="M0 6.826c0 1.455.781 2.765 2.001 3.656a.385.385 0 0 1 .143.439l-.161.6-.1.373a.5.5 0 0 0-.032.14.19.19 0 0 0 .193.193q.06 0 .111-.029l1.268-.733a.6.6 0 0 1 .308-.088q.088 0 .171.025a6.8 6.8 0 0 0 1.625.26 4.5 4.5 0 0 1-.177-1.251c0-2.936 2.785-5.02 5.824-5.02l.15.002C10.587 3.429 8.392 2 5.796 2 2.596 2 0 4.16 0 6.826m4.632-1.555a.77.77 0 1 1-1.54 0 .77.77 0 0 1 1.54 0m3.875 0a.77.77 0 1 1-1.54 0 .77.77 0 0 1 1.54 0"/>
+          </svg>
+          <span id="submit-btn-label">LET’S TALK &rarr;</span>
+        </button>
+        <p class="form-note" id="form-note"></p>
+      </form>
+    </div>
+
+    <div class="socials-card" id="socialsCard">
+      <h3 id="socials-heading">// FIND ME ELSEWHERE</h3>
+      <div class="socials-list" id="socials-list"></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links" id="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+  </div>
+</footer>
+
+<div class="legal-footer">
+  <p class="copyright-line" id="legal-copyright">© 2026 Muhibulla Mahbub. All rights reserved.</p>
+  <p id="legal-text">This is a personal website. All names and trademarks mentioned belong to their respective owners.</p>
+</div>
+
+<!-- Custom Interactive Cursor -->
+<div class="custom-cursor-container" id="customCursor">
+  <svg class="cursor-arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 3L10.07 19.97L13.58 12.58L20.97 9.07L3 3Z" fill="#2B7FFF" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg class="cursor-pointer-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+    <path d="M8.5 1.75v2.716l.047-.002c.312-.012.742-.016 1.051.046.28.056.543.18.738.288.273.152.456.385.56.642l.132-.012c.312-.024.794-.038 1.158.108.37.148.689.487.88.716q.113.137.195.248h.582a2 2 0 0 1 1.99 2.199l-.272 2.715a3.5 3.5 0 0 1-.444 1.389l-1.395 2.441A1.5 1.5 0 0 1 12.42 16H6.118a1.5 1.5 0 0 1-1.342-.83l-1.215-2.43L1.07 8.589a1.517 1.517 0 0 1 2.373-1.852L5 8.293V1.75a1.75 1.75 0 0 1 3.5 0"/>
+  </svg>
+  <svg class="cursor-text-icon" viewBox="0 0 14 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 1H11M7 1V21M3 21H11" stroke="#00A86B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M3 1H11M7 1V21M3 21H11" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <div class="cursor-spinner-icon"></div>
+  <svg class="cursor-unavailable-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="9" stroke="#E63946" stroke-width="3" fill="#FFFFFF"/>
+    <line x1="5.6" y1="5.6" x2="18.4" y2="18.4" stroke="#E63946" stroke-width="3"/>
+  </svg>
+  <div class="custom-cursor-badge" id="cursorBadge">You</div>
+</div>
+
+<script>
+const CONFIG = {
+  logo: { tag: "MUHIB", suffix: "/dev" },
+
+  links: {
+    homePage: "index.html",
+    aboutPage: "about.html",
+    contactEmail: "muhibulla.mahbub@gmail.com",
+    github: "https://github.com/muhibulla-mahbub",
+    linkedin: "https://bd.linkedin.com/in/muhibulla-mahbub-117637434"
+  },
+
+  breadcrumb: [
+    { label: "Home", href: "index.html" },
+    { label: "Contact", href: null }
+  ],
+
+  pageHeader: {
+    eyebrow: "// GET IN TOUCH",
+    title: "Let's talk.",
+    sub: "Got a question, an idea, or just want to say hi? Write below or reach out directly."
+  },
+
+  info: {
+    email: "muhibulla.mahbub@gmail.com",
+    location: "Dhaka, Bangladesh",
+    availability: "Always up for a good conversation"
+  },
+
+  socials: {
+    heading: "// FIND ME ELSEWHERE",
+    items: [
+      { label: "GitHub", handle: "@muhibulla-mahbub", href: "https://github.com/muhibulla-mahbub" },
+      { label: "LinkedIn", handle: "/in/muhibulla-mahbub", href: "https://bd.linkedin.com/in/muhibulla-mahbub-117637434" }
+    ]
+  },
+
+  form: {
+    title: "LET\u2019S TALK",
+    sub: "// Tell us what's on your mind.",
+    submitLabel: "LET\u2019S TALK \u2192",
+    // Text shown when the person taps the info (i) button
+    note: "Send your name, email and website. You'll get a confirmation email right away. We'll review your request, and if we can help, we'll email you a link to book a call."
+  },
+
+  footerLinks: [
+    { label: "Home", href: "index.html" },
+    { label: "About", href: "about.html" }
+  ],
+
+  legal: {
+    copyright: "© 2026 Muhibulla Mahbub. All rights reserved.",
+    text: "This is a personal website. All names and trademarks mentioned belong to their respective owners."
+  }
+};
+
+function el(tag, opts) {
+  opts = opts || {};
+  const node = document.createElement(tag);
+  if (opts.className) node.className = opts.className;
+  if (opts.text) node.textContent = opts.text;
+  if (opts.html) node.innerHTML = opts.html;
+  if (opts.href) node.href = opts.href;
+  return node;
+}
+
+// document.getElementById("logo-tag").textContent = CONFIG.logo.tag;
+// document.getElementById("logo-suffix").textContent = CONFIG.logo.suffix;
+
+
+document.getElementById("page-eyebrow").textContent = CONFIG.pageHeader.eyebrow;
+document.getElementById("page-title").textContent = CONFIG.pageHeader.title;
+document.getElementById("page-sub").textContent = CONFIG.pageHeader.sub;
+
+document.getElementById("info-email").href = "mailto:" + CONFIG.info.email;
+document.getElementById("info-location").textContent = CONFIG.info.location;
+document.getElementById("info-availability").textContent = CONFIG.info.availability;
+
+document.getElementById("socials-heading").textContent = CONFIG.socials.heading;
+const socialsListEl = document.getElementById("socials-list");
+socialsListEl.innerHTML = "";
+CONFIG.socials.items.forEach(function(s) {
+  const a = el("a", { href: s.href });
+  a.appendChild(el("span", { text: s.label }));
+  a.appendChild(el("span", { text: s.handle }));
+  socialsListEl.appendChild(a);
+});
+
+document.getElementById("form-title").textContent = CONFIG.form.title;
+document.getElementById("form-sub").textContent = CONFIG.form.sub;
+document.getElementById("submit-btn-label").textContent = CONFIG.form.submitLabel;
+document.getElementById("form-info").textContent = CONFIG.form.note;
+document.getElementById("form-note").textContent = "";
+
+const infoBtnEl = document.getElementById("info-btn");
+const formInfoEl = document.getElementById("form-info");
+infoBtnEl.addEventListener("click", function(){
+  const open = infoBtnEl.getAttribute("aria-expanded") === "true";
+  infoBtnEl.setAttribute("aria-expanded", open ? "false" : "true");
+  formInfoEl.classList.toggle("open", !open); formInfoEl.setAttribute("aria-hidden", open ? "true" : "false");
+});
+
+const footerLinksEl = document.getElementById("footer-links");
+footerLinksEl.innerHTML = "";
+CONFIG.footerLinks.forEach(function(link) {
+  footerLinksEl.appendChild(el("a", { text: link.label, href: link.href }));
+});
+
+document.getElementById("legal-copyright").textContent = CONFIG.legal.copyright;
+document.getElementById("legal-text").textContent = CONFIG.legal.text;
+
+/* =====================================================================
+   LET'S TALK FORM: ON / OFF SWITCH
+   =====================================================================
+   This one word turns the form (and the Google Apps Script) ON or OFF.
+
+     const FORM_SWITCH = "on";    -> form works. Button is red.
+     const FORM_SWITCH = "off";   -> form is paused. Nothing is sent to
+                                     Google Apps Script. Button turns
+                                     cement (grey) and cannot be clicked.
+
+   How to change it:
+     1. Find the line below that starts with:  const FORM_SWITCH
+     2. Change "on" to "off" (or "off" to "on"). Keep the quote marks.
+     3. Save contact.html and upload / publish it again.
+
+   Note: "ON" / "On" / "true" also work for on, and "OFF" / "false" for off.
+   ===================================================================== */
+const FORM_SWITCH = "on";   // <-- change this word: "on" or "off"
+
+const FORM_IS_ON = !["off", "false"].includes(String(FORM_SWITCH).trim().toLowerCase());
+
+/* ---------- CONTACT FORM -> GOOGLE APPS SCRIPT ---------- */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzayZzi7Ok_S1WTBdFe3zXM7pYJZq0Hx-patcA9OT1V1rSE9x0zWeRSsR6VUbrIBDHO/exec";
+
+const contactFormEl = document.getElementById("contact-form");
+const submitBtnEl = document.getElementById("submit-btn");
+const submitBtnLabelEl = document.getElementById("submit-btn-label");
+const formNoteEl = document.getElementById("form-note");
+const originalSubmitLabel = submitBtnLabelEl.textContent;
+
+if (!FORM_IS_ON) {
+  // Switched OFF: cement button, disabled fields, nothing is ever sent.
+  submitBtnEl.disabled = true;
+  submitBtnEl.classList.add("is-off");
+  contactFormEl.querySelectorAll("input").forEach(function(inp){ inp.disabled = true; });
+  formNoteEl.textContent = "Requests are paused right now. Please check back soon.";
+}
+
+contactFormEl.addEventListener("submit", function(e){
+  e.preventDefault();
+  if (!FORM_IS_ON) return;
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const website = document.getElementById("website").value.trim();
+
+  if (!name || !email || !website) return;
+
+  submitBtnEl.disabled = true;
+  submitBtnLabelEl.textContent = "SENDING...";
+  formNoteEl.textContent = "Sending your request...";
+  if (window.setCursorBusy) window.setCursorBusy(true, "Sending");
+
+  // give up after 25 seconds so the button can never stay stuck on "SENDING..."
+  const ctrl = window.AbortController ? new AbortController() : null;
+  const sendTimer = setTimeout(function(){ if (ctrl) ctrl.abort(); }, 25000);
+
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({ name, email, website }),
+    signal: ctrl ? ctrl.signal : undefined
+  })
+    .then(function(res){ return res.json(); })
+    .then(function(data){
+      if (data.status === "success") {
+        submitBtnLabelEl.textContent = "REQUEST SENT ✓";
+        formNoteEl.textContent = "Thanks! Check your inbox for a confirmation email.";
+        contactFormEl.reset();
+      } else if (data.status === "duplicate") {
+        submitBtnEl.disabled = false;
+        submitBtnLabelEl.textContent = originalSubmitLabel;
+        formNoteEl.textContent = "We already have a request from this email.";
+      } else {
+        throw new Error(data.message || "Unknown error");
+      }
+    })
+    .catch(function(err){
+      submitBtnEl.disabled = false;
+      submitBtnLabelEl.textContent = originalSubmitLabel;
+      formNoteEl.textContent = "Something went wrong. Please try again or email me directly.";
+      console.error("Contact form error:", err);
+    })
+    .finally(function(){
+      clearTimeout(sendTimer);
+      if (window.setCursorBusy) window.setCursorBusy(false);
+    });
+});
+
+document.addEventListener("contextmenu", function(e){ e.preventDefault(); });
+document.addEventListener("dragstart", function(e){ e.preventDefault(); });
+document.addEventListener("copy", function(e){
+  if (e.target.closest && e.target.closest("input, textarea")) return;
+  e.preventDefault();
+});
+document.addEventListener("keydown", function(e){
+  const k = e.key.toLowerCase();
+  const blockedCombos = (e.ctrlKey || e.metaKey) && ["s","u","p"].indexOf(k) !== -1;
+  const devtoolsKey = k === "f12";
+  if (blockedCombos || devtoolsKey) e.preventDefault();
+});
+
+/* ---------- LOADING SCREEN CONTROLLER ---------- */
+document.addEventListener('contextmenu', function (e) {
+  if (e.target.closest('#loading-screen')) {
+    e.preventDefault();
+    return false;
+  }
+});
+const loaderShield = document.getElementById('protection-shield');
+if (loaderShield) {
+  loaderShield.addEventListener('touchstart', function(e){
+    if (e.touches.length > 1) e.preventDefault();
+  }, { passive: false });
+  loaderShield.addEventListener('dragstart', function(e){ e.preventDefault(); });
+}
+const loaderElement = document.getElementById('loading-screen');
+const loaderVideo = document.getElementById('loading-video');
+function hideLoading(){
+  if (loaderElement) {
+    loaderElement.classList.add('loading-hidden');
+    loaderElement.setAttribute('aria-hidden', 'true');
+    
+  }
+  /* once the fade-out has finished, stop the hidden video so it stops using CPU/battery */
+  setTimeout(function(){
+    if (!loaderVideo) return;
+    try { loaderVideo.pause(); loaderVideo.removeAttribute('autoplay'); loaderVideo.removeAttribute('loop'); } catch (e) {}
+  }, 900);
+}
+let loaderTimer = null;
+function startHide(delay){
+  if (loaderTimer) return;
+  loaderTimer = setTimeout(hideLoading, delay);
+}
+window.addEventListener('load', () => {
+  if (loaderVideo) {
+    const p = loaderVideo.play();
+    if (p && p.catch) p.catch(() => {});
+  }
+  startHide(1800);
+});
+if (document.readyState === 'complete') startHide(1800);
+setTimeout(() => startHide(0), 7000);   // if "load" is slow (big images/video), do not keep visitors waiting
+
+/* ---------- CUSTOM INTERACTIVE CURSOR LOGIC ---------- */
+(function(){
+  const cursor = document.getElementById('customCursor');
+  const badge = document.getElementById('cursorBadge');
+  if (!cursor || !badge) return;
+  if (!(window.matchMedia && window.matchMedia('(hover:none) and (pointer:coarse)').matches)) {
+    document.documentElement.classList.add('has-custom-cursor');
+  }
+
+  const DISABLED_SEL = '[disabled], .disabled, [aria-disabled="true"]';
+  const WRITING_SEL = 'input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]), textarea, [contenteditable=""], [contenteditable="true"]';
+  const CLICK_SEL = '.wa-card, a[href], button, [role="button"], [onclick], label[for], select, summary, input[type="button"], input[type="submit"], input[type="reset"], input[type="checkbox"], input[type="radio"]';
+
+  const keyboardSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm13 .25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25h-.5a.25.25 0 0 0-.25.25M2.25 8a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5A.25.25 0 0 0 3 8.75v-.5A.25.25 0 0 0 2.75 8zM4 8.25v.5c0 .138.112.25.25.25h.5A.25.25 0 0 0 5 8.75v-.5A.25.25 0 0 0 4.75 8h-.5a.25.25 0 0 0-.25.25M6.25 8a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5A.25.25 0 0 0 7 8.75v-.5A.25.25 0 0 0 6.75 8zM8 8.25v.5c0 .138.112.25.25.25h.5A.25.25 0 0 0 9 8.75v-.5A.25.25 0 0 0 8.75 8h-.5a.25.25 0 0 0-.25.25M13.25 8a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25zm0 2a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25zm-3-2a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h1.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25zm.75 2.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25h-.5a.25.25 0 0 0-.25.25M11.25 6a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25zM9 6.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5A.25.25 0 0 0 9.75 6h-.5a.25.25 0 0 0-.25.25M7.25 6a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5A.25.25 0 0 0 8 6.75v-.5A.25.25 0 0 0 7.75 6zM5 6.25v.5c0 .138.112.25.25.25h.5A.25.25 0 0 0 6 6.75v-.5A.25.25 0 0 0 5.75 6h-.5a.25.25 0 0 0-.25.25M2.25 6a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h1.5A.25.25 0 0 0 4 6.75v-.5A.25.25 0 0 0 3.75 6zM2 10.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25h-.5a.25.25 0 0 0-.25.25M4.25 10a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h5.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25z"/></svg>';
+
+  let x = -100, y = -100;
+  let isDown = false, isBusy = false, busyLabel = 'Working';
+
+  function render(){
+    cursor.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)' + (isDown ? ' scale(0.9)' : '');
+  }
+
+  function setBadgeHTML(html){
+    if (badge.innerHTML !== html) badge.innerHTML = html;
+  }
+  function setBadgeText(text){
+    if (badge.textContent !== text) badge.textContent = text;
+  }
+
+  function setState(cls){
+    const next = 'custom-cursor-container' + (cls ? ' ' + cls : '');
+    if (cursor.className !== next) cursor.className = next;
+  }
+
+  function overDisabled(){
+    const list = document.querySelectorAll(DISABLED_SEL);
+    for (let i = 0; i < list.length; i++){
+      const r = list[i].getBoundingClientRect();
+      if (r.width > 0 && r.height > 0 && x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) return true;
+    }
+    return false;
+  }
+
+  // While a submission is in progress, hovering the LET'S TALK button or
+  // the form fields shows "Unavailable" (acting on them would do nothing);
+  // hovering anywhere else during that time still shows the busy spinner.
+  function overBusyFormControl(){
+    if (!isBusy) return false;
+    const nameEl = document.getElementById('name');
+    const emailEl = document.getElementById('email');
+    const submitEl = document.getElementById('submit-btn');
+    const websiteEl = document.getElementById('website');
+    const targets = [nameEl, emailEl, websiteEl, submitEl].filter(Boolean);
+    for (let i = 0; i < targets.length; i++){
+      const r = targets[i].getBoundingClientRect();
+      if (r.width > 0 && r.height > 0 && x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) return true;
+    }
+    return false;
+  }
+
+  function update(target){
+    if (overBusyFormControl()) {
+      setState('is-unavailable');
+      setBadgeText('Unavailable');
+      return;
+    }
+    if (isBusy) {
+      setState('is-busy');
+      setBadgeHTML(busyLabel + '<span class="animated-dots"></span>');
+      return;
+    }
+    if (overDisabled()) {
+      setState('is-unavailable');
+      setBadgeText('Unavailable');
+      return;
+    }
+    if (target && target.closest) {
+      if (target.closest(WRITING_SEL)) {
+        setState('is-writing');
+        setBadgeHTML(keyboardSvg + ' Writing<span class="animated-dots"></span>');
+        return;
+      }
+      if (target.closest(CLICK_SEL)) {
+        setState('is-pointer');
+        setBadgeText('Click');
+        return;
+      }
+    }
+    setState('');
+    setBadgeText('You');
+  }
+
+  function refresh(){
+    update(document.elementFromPoint(x, y));
+  }
+
+  window.setCursorBusy = function(busy, label){
+    isBusy = !!busy;
+    busyLabel = label || 'Working';
+    refresh();
+  };
+
+const nameInputEl = document.getElementById('name');
+  const emailInputEl = document.getElementById('email');
+  if (nameInputEl) nameInputEl.addEventListener('input', refresh);
+  if (emailInputEl) emailInputEl.addEventListener('input', refresh);
+  const websiteInputEl = document.getElementById('website');
+  if (websiteInputEl) websiteInputEl.addEventListener('input', refresh);
+
+  let movePending = false, moveTarget = null;
+  window.addEventListener('mousemove', function(e){
+    x = e.clientX;
+    y = e.clientY;
+    moveTarget = e.target;
+    if (movePending) return;
+    movePending = true;
+    requestAnimationFrame(function(){
+      movePending = false;
+      render();
+      update(moveTarget);
+    });
+  }, { passive: true });
+
+  window.addEventListener('mousedown', function(){
+    if (cursor.classList.contains('is-unavailable')) return;
+    isDown = true;
+    render();
+  });
+  window.addEventListener('mouseup', function(){ isDown = false; render(); });
+
+  let scrollTick = false;
+  window.addEventListener('scroll', function(){
+    if (scrollTick) return;
+    if (!document.documentElement.classList.contains('has-custom-cursor')) return;   // touch phones/tablets hide the cursor, nothing to refresh
+    scrollTick = true;
+    requestAnimationFrame(function(){ scrollTick = false; refresh(); });
+  }, { passive: true });
+
+  document.documentElement.addEventListener('mouseleave', function(){
+    isDown = false;
+    cursor.style.opacity = '0';
+  });
+  document.documentElement.addEventListener('mouseenter', function(){
+    cursor.style.opacity = '1';
+  });
+})();
+
+/* ---------- WHATSAPP CARD: HOVER (mouse) / TAP (phone), NEVER INTERRUPTED (no library needed) ---------- */
+(function(){
+  const $ = function(id){ return document.getElementById(id); };
+  const card = $('whatsappCard');
+  const icon = $('waAppIconWrapper');
+  const badge = $('waNotificationBadge');
+  const dot = $('waMorphDot');
+  const phone = $('waPhone');
+  const inputBar = $('waInputBar');
+  const keyboard = $('waKeyboard');
+  const msg1 = $('waMsg1'), msg2 = $('waMsg2');
+  const typing = $('waTyping');
+  const typingLeft = $('waTypingLeft');
+  const sigs = { 2: $('waSig2'), 3: $('waSig3'), 4: $('waSig4') };
+  const typingDots = card ? card.querySelectorAll('.wa-typing-dot') : [];
+  const typingDotsLeft = card ? card.querySelectorAll('.wa-typing-dot-left') : [];
+  if (!card || !icon || !phone || !card.animate) return;
+
+  /* Real-time clock in the phone status bar */
+  function updateClock(){
+    const now = new Date();
+    let h = now.getHours() % 12; if (!h) h = 12;
+    let m = now.getMinutes(); if (m < 10) m = '0' + m;
+    const t = $('waStatusTime');
+    if (t) t.textContent = h + ':' + m;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  const all = [icon, badge, dot, phone, inputBar, keyboard, msg1, msg2, typing, typingLeft]
+    .concat(Array.prototype.slice.call(typingDots), Array.prototype.slice.call(typingDotsLeft));
+  const wait = function(ms){ return new Promise(function(r){ setTimeout(r, ms); }); };
+  const EASE = 'cubic-bezier(.65,0,.35,1)';
+  const BACK_OUT = 'cubic-bezier(.34,1.45,.64,1)';
+  const BACK_IN = 'cubic-bezier(.6,-.3,.74,.05)';
+
+  function go(el, frames, ms, ease, extra){
+    const a = el.animate(frames, Object.assign({ duration: ms, easing: ease || EASE, fill: 'forwards' }, extra || {}));
+    return a.finished;
+  }
+  function bounce(list, iterations){
+    return Promise.all(Array.prototype.map.call(list, function(d, i){
+      return d.animate([{transform:'translateY(0)'},{transform:'translateY(-3px)'}],
+        { duration:150, delay:i*100, iterations:iterations, direction:'alternate', easing:'ease-in-out' }).finished;
+    }));
+  }
+  function signal(level){
+    Object.keys(sigs).forEach(function(k){ sigs[k].classList.toggle('active', Number(k) === level); });
+  }
+  function resetAll(){
+    all.forEach(function(el){ el.getAnimations().forEach(function(a){ a.cancel(); }); });
+    typing.style.display = '';
+    typingLeft.style.display = '';
+    signal(2);
+  }
+
+  let isPlaying = false;
+
+  async function play(){
+    if (isPlaying) return;          // wait until this animation is finished
+    isPlaying = true;
+    try {
+      resetAll();
+      await wait(300);
+      await go(badge, [{opacity:0, transform:'scale(0)'},{opacity:1, transform:'scale(1)'}], 300);
+      await go(icon, [{transform:'scale(1)'},{transform:'scale(1.1)'},{transform:'scale(1)'}], 400);
+      await wait(100);
+      await go(icon, [{transform:'scale(1)', opacity:1},{transform:'scale(0)', opacity:0}], 400, BACK_IN);
+      await go(dot, [{opacity:0, transform:'scale(1)'},{opacity:1, transform:'scale(1)'}], 150);
+      await go(dot, [{transform:'scale(1)'},{transform:'scale(2.2)'},{transform:'scale(1)'}], 400);
+      await go(dot, [{opacity:1, transform:'scale(1)'},{opacity:0, transform:'scale(0)'}], 150);
+      await go(phone, [{opacity:0, transform:'scale(.15)'},{opacity:1, transform:'scale(1)'}], 700, BACK_OUT);
+
+      /* 1) left typing, then left message */
+      typingLeft.style.display = 'inline-flex';
+      await go(typingLeft, [{opacity:0},{opacity:1}], 200);
+      await bounce(typingDotsLeft, 2);
+      await go(typingLeft, [{opacity:1},{opacity:0}], 150);
+      typingLeft.style.display = 'none';
+      await go(msg1, [{opacity:0, transform:'translateY(10px) scale(.95)'},{opacity:1, transform:'translateY(0) scale(1)'}], 300, BACK_OUT);
+
+      /* 2) input bar, then keyboard */
+      await wait(100);
+      await go(inputBar, [{transform:'translateY(40px)'},{transform:'translateY(0)'}], 400, 'ease-out');
+      await wait(100);
+      await go(keyboard, [{transform:'translateY(100%)'},{transform:'translateY(0)'}], 450, 'ease-out');
+      signal(3);
+
+      /* 3) right typing, then right message */
+      typing.style.display = 'inline-flex';
+      await go(typing, [{opacity:0},{opacity:1}], 250);
+      await bounce(typingDots, 3);
+      await go(typing, [{opacity:1},{opacity:0}], 200);
+      typing.style.display = 'none';
+      signal(4);
+      await go(msg2, [{opacity:0, transform:'translateY(10px) scale(.95)'},{opacity:1, transform:'translateY(0) scale(1)'}], 350, BACK_OUT);
+
+      /* 4) close everything */
+      await wait(1200);
+      await Promise.all([
+        go(keyboard, [{transform:'translateY(0)'},{transform:'translateY(100%)'}], 400, 'ease-in'),
+        go(inputBar, [{transform:'translateY(0)'},{transform:'translateY(40px)'}], 350, 'ease-in', { delay:200 })
+      ]);
+      await go(phone, [{opacity:1, transform:'scale(1)'},{opacity:0, transform:'scale(.12)'}], 600, BACK_IN);
+      await go(dot, [{opacity:0, transform:'scale(1)'},{opacity:1, transform:'scale(1.8)'}], 200);
+      await go(dot, [{transform:'scale(1.8)'},{transform:'scale(1)'}], 200);
+      await go(dot, [{opacity:1, transform:'scale(1)'},{opacity:0, transform:'scale(0)'}], 150);
+      badge.getAnimations().forEach(function(a){ a.cancel(); });
+      icon.getAnimations().forEach(function(a){ a.cancel(); });
+      await go(icon, [{transform:'scale(0)', opacity:0},{transform:'scale(1)', opacity:1}], 500, BACK_OUT, { fill:'none' });
+    } catch (err) {
+      console.error('WhatsApp animation error:', err);
+    } finally {
+      resetAll();
+      isPlaying = false;
+    }
+  }
+
+  // Mouse (desktop): play when the pointer enters the card.
+  card.addEventListener('pointerenter', function(e){
+    if (e.pointerType === 'mouse') play();
+  });
+  // Phone / touch: play when the card is tapped (click also works on desktop).
+  // The MESSAGE ME button opens WhatsApp, no animation.
+  card.addEventListener('click', function(e){
+    if (e.target.closest('.wa-message-button')) return;
+    play();
+  });
+})();
+
+/* ---------- FIND ME ELSEWHERE: SAME HEIGHT AS LOCATION + STATUS CARDS (computer only) ---------- */
+(function(){
+  const loc = document.getElementById('locationCard');
+  const status = document.getElementById('statusCard');
+  const socials = document.getElementById('socialsCard');
+  const stack = document.querySelector('.info-stack');
+  if (!loc || !status || !socials || !stack) return;
+
+  const desktop = window.matchMedia('(min-width:901px)');
+
+  function match(){
+    if (!desktop.matches) { socials.style.minHeight = ''; return; }
+    const gap = parseFloat(getComputedStyle(stack).rowGap) || 20;
+    socials.style.minHeight = (loc.offsetHeight + status.offsetHeight + gap) + 'px';
+  }
+
+  match();
+  window.addEventListener('resize', match);
+  window.addEventListener('load', match);
+  if (desktop.addEventListener) desktop.addEventListener('change', match);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(match);
+  if (window.ResizeObserver) {
+    const ro = new ResizeObserver(match);
+    ro.observe(loc);
+    ro.observe(status);
+  }
+})();
+
+/* ---------- CARD PRESS EFFECT ----------
+   Pressing ANY card, or the SEND EMAIL / MESSAGE ME buttons inside them, presses the whole card.
+   Done with the script because :active is unreliable on phones (iPhone), and these buttons open another app at once. */
+(function(){
+  const MIN_SHOWN = 260;   // ms: a quick tap still shows the effect clearly
+  document.querySelectorAll('.info-card, .wa-card').forEach(function(card){
+    let downAt = 0, timer = null;
+    function release(){
+      clearTimeout(timer);
+      timer = setTimeout(function(){ card.classList.remove('is-pressed'); }, Math.max(0, MIN_SHOWN - (Date.now() - downAt)));
+    }
+    card.addEventListener('pointerdown', function(){
+      clearTimeout(timer);
+      downAt = Date.now();
+      card.classList.add('is-pressed');
+    });
+    card.addEventListener('pointerup', release);
+    card.addEventListener('pointercancel', function(){ clearTimeout(timer); card.classList.remove('is-pressed'); });
+    card.addEventListener('pointerleave', function(e){ if (e.pointerType === 'mouse') release(); });
+  });
+})();
+</script>
+
+<script>
+(function(){var t=document.getElementById('c2nToggle'),m=document.getElementById('c2nMobile');if(!t||!m)return;
+function set(o){m.classList.toggle('open',o);t.classList.toggle('menu-active',o);t.setAttribute('aria-expanded',String(o));t.setAttribute('aria-label',o?'Close navigation menu':'Open navigation menu')}
+t.addEventListener('click',function(){set(!m.classList.contains('open'))});
+m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){set(false)})});})();
+</script>
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.c2n-links a, .c2n-mobile a:not(.c2n-cta)'));
+  if(!links.length)return;
+  function file(a){return (a.getAttribute('href')||'').split('#')[0].split('?')[0];}
+  var initial=null;
+  links.forEach(function(a){if(a.getAttribute('aria-current')==='page'&&initial===null)initial=file(a);});
+  function mark(f){links.forEach(function(a){if(file(a)===f)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});}
+  links.forEach(function(a){
+    a.addEventListener('click',function(e){
+      if(e.defaultPrevented||e.button>0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;
+      mark(file(a));
+    });
+  });
+  window.addEventListener('pageshow',function(e){if(e.persisted&&initial!==null)mark(initial);});
+})();
+</script>
+</body>
+</html>
